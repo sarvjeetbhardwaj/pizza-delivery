@@ -1,14 +1,14 @@
 import sys
 import os
 import asyncio
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from database import engine, Base
-from model.models import User, Order  # Add your models if needed
+from models import User, Order  # Add your models if needed
 from sqlmodel import create_engine, text, SQLModel
 
 async def init_db():
+    #print(Base.metadata.tables.keys())
     async with engine.begin() as conn:
-        await conn.run_sync(SQLModel.metadata.create_all)
+        await conn.run_sync(Base.metadata.create_all)
 
 if __name__ == "__main__":
     asyncio.run(init_db())
