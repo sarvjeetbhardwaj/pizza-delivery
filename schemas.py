@@ -1,5 +1,11 @@
 from pydantic import BaseModel
 from typing import Optional
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+secret_token =  os.getenv('secret_token')
 
 class SignUpModel(BaseModel):
     username : str
@@ -23,4 +29,4 @@ class SignUpModel(BaseModel):
 
 
 class Settings(BaseModel):
-    authjwt_secret_key:str = '829e62d8cce82e22f8d8874372cdade5e6b26254fb7662b3095908a36ee0ee88'
+    authjwt_secret_key:str = secret_token
